@@ -1,0 +1,32 @@
+{
+  "name": "pi-academic-research-ieee",
+  "version": "0.1.0",
+  "private": true,
+  "description": "IEEE-first academic research and manuscript workflow package for Pi, inspired by academic-research-skills and nature-skills.",
+  "license": "CC-BY-NC-4.0",
+  "keywords": [
+    "pi-package",
+    "pi",
+    "agent-skills",
+    "academic-writing",
+    "ieee",
+    "research"
+  ],
+  "type": "module",
+  "pi": {
+    "extensions": [
+      "./extensions"
+    ],
+    "skills": [
+      "./skills"
+    ]
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "check:skills": "find skills -name SKILL.md -maxdepth 3 -print",
+    "pack:dry-run": "npm pack --dry-run"
+  }
+}

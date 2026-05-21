@@ -1,0 +1,22 @@
+# Reference repositories are cloned for local study only.
+# Do not vendor upstream projects into this package by accident.
+ref_repos/
+
+# Node / package artifacts
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# Build outputs
+dist/
+*.tgz
+
+# OS / editor
+.DS_Store
+.vscode/
+.idea/
+
+# Pi local state
+.pi/sessions/
