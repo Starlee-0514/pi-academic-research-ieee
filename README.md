@@ -26,7 +26,8 @@ pi-academic-research-ieee/
 ├── package.json
 ├── README.md
 ├── docs/
-│   └── USAGE.md
+│   ├── USAGE.md
+│   └── WALKTHROUGH.md
 ├── extensions/
 │   └── index.ts
 ├── skills/
@@ -42,8 +43,8 @@ pi-academic-research-ieee/
 
 ## Usage / 使用方式
 
-For the full usage guide, see [`docs/USAGE.md`](docs/USAGE.md).
-完整中文使用說明請看 [`docs/USAGE.md`](docs/USAGE.md)。
+For the full usage guide, see [`docs/USAGE.md`](docs/USAGE.md). For a complete example, see [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md).
+完整中文使用說明請看 [`docs/USAGE.md`](docs/USAGE.md)；完整範例請看 [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md)。
 
 ### Quick start / 快速開始
 

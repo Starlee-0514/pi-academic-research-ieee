@@ -5,6 +5,21 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added example IEEE workflow walkthrough
+
+**Changes:**
+- Added `docs/WALKTHROUGH.md` with a complete example from research intake through literature review, paper planning, methodology audit, drafting, review, revision, citation checks, and IEEEtran final checks.
+- Updated `README.md` and `docs/USAGE.md` to link the walkthrough.
+- Updated `ROADMAP.md` to mark the example walkthrough completed.
+- Ran `npm test`; smoke test passed with 15 ASR-compatible routes validated.
+
+**Decisions:**
+- Kept the walkthrough explicitly example-only and warned users to replace placeholder claims, citations, and results with their own verified evidence.
+
+**Next Steps:**
+- [MED] Add reusable prompt templates for common IEEE research, writing, review, and citation-check tasks.
+- [LOW] Add terminal transcript screenshots once the Pi UX stabilizes.
+
 ## 2026-05-22 — Added user-facing usage documentation
 
 **Changes:**

@@ -2,6 +2,8 @@
 
 這個套件提供一組 IEEE 優先的 Pi skills 與 `/ars-*` 指令，協助你完成從研究構想到投稿前檢查的工作流：文獻研究、論文規劃、IEEE 風格撰寫、技術審稿、修回與 camera-ready 檢查。
 
+如果你想看完整操作範例，請先讀 [`docs/WALKTHROUGH.md`](WALKTHROUGH.md)。
+
 > 目前套件標記為 `private: true`，主要供本機 Pi 開發與個人/非商業研究工作流使用。
 
 ## 1. 安裝與啟用

@@ -17,6 +17,7 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## ✅ Completed
 
+- [MED] Example IEEE workflow walkthrough ✓ 2026-05-22
 - [MED] User-facing usage documentation ✓ 2026-05-22
 - [MED] Pi package validation ✓ 2026-05-22
 - [HIGH] IEEE-first ASR-style skill implementation ✓ 2026-05-22
