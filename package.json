@@ -26,6 +26,7 @@
   },
   "devDependencies": {},
   "scripts": {
+    "test": "node scripts/smoke-extension.mjs",
     "check:skills": "find skills -name SKILL.md -maxdepth 3 -print",
     "pack:dry-run": "npm pack --dry-run"
   }
