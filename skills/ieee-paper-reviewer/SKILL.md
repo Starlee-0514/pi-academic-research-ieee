@@ -29,6 +29,16 @@ Use these prompt-layer protocols when the task requires them:
 
 Reviewers may flag citation or claim risks, but should not invent missing references, experiments, line numbers, or revised prose.
 
+## Agent prompt template registry
+
+Use one role template per reviewer lens, keeping lens reports separate before editorial synthesis:
+
+- Field and venue fit: `../../templates/agents/paper-reviewer/field-analyst.prompt.md`
+- Methodology and experiment audit: `../../templates/agents/paper-reviewer/methodology-reviewer.prompt.md`
+- Domain positioning and related work: `../../templates/agents/paper-reviewer/domain-reviewer.prompt.md`
+- Strongest rejection case: `../../templates/agents/paper-reviewer/devils-advocate-reviewer.prompt.md`
+- Final decision synthesis: `../../templates/agents/paper-reviewer/editorial-synthesizer.prompt.md`
+
 ## ASR-compatible modes
 
 | Mode | Use when | Output |

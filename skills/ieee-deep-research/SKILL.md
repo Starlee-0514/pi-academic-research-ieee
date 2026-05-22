@@ -33,6 +33,16 @@ Use these prompt-layer protocols when the task requires them:
 
 If a protocol cannot be fully executed because search/source access is unavailable, disclose the limit and return `AUTHOR_INPUT_NEEDED`; do not pretend verification succeeded.
 
+## Agent prompt template registry
+
+Use one role template per specialized research task, keeping outputs separate before synthesis:
+
+- RQ scoping / contribution discovery: `../../templates/agents/deep-research/research-question.prompt.md`
+- Source discovery and literature set construction: `../../templates/agents/deep-research/bibliography.prompt.md`
+- Citation/source metadata checks: `../../templates/agents/deep-research/source-verification.prompt.md`
+- Related-work synthesis and claim-evidence mapping: `../../templates/agents/deep-research/synthesis.prompt.md`
+- Guided exploratory dialogue: `../../templates/agents/deep-research/socratic-mentor.prompt.md`
+
 ## ASR-compatible modes
 
 | Mode | Use when | Output |

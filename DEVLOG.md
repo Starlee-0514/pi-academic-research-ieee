@@ -5,6 +5,23 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added Phase 1 ASR agent prompt templates
+
+**Changes:**
+- Added 19 IEEE-first prompt templates under `templates/agents/` covering core deep-research, academic-paper, paper-reviewer, and pipeline roles.
+- Updated all four IEEE `SKILL.md` files with agent prompt template registries.
+- Expanded `scripts/lint-skill-metadata.mjs` so `npm test` also verifies agent prompt templates and registry references.
+- Updated `templates/README.md`, `NOTICE.md`, `references/source-ledger.md`, and `ROADMAP.md` for the new templates and attribution.
+- Ran `npm test`; smoke test and lint passed.
+
+**Decisions:**
+- Implemented Phase 1 as role prompt templates rather than separate runtime agents, matching the user's requested one-agent/one-template design while keeping Pi routing simple.
+- Kept templates concise and IEEE-first, using upstream ARS agent files as structural references rather than copying agent prompt bodies.
+
+**Next Steps:**
+- [HIGH] Add mode-specific dispatch rules so each `/ars-*` mode declares which templates to run and in what order.
+- [MED] Add remaining lower-priority templates such as visualization, abstract bilingual, meta-analysis, risk-of-bias, and collaboration-depth roles.
+
 ## 2026-05-22 — Added skill metadata and safety protocol lint
 
 **Changes:**

@@ -35,6 +35,17 @@ Use these prompt-layer protocols when the task requires them:
 
 When drafting factual content, anti-leakage is mandatory: unsupported facts become `[MATERIAL GAP: ...]` or `AUTHOR_INPUT_NEEDED`, never plausible filler.
 
+## Agent prompt template registry
+
+Use one role template per specialized writing task, keeping role output separate until synthesis:
+
+- Intake/configuration: `../../templates/agents/academic-paper/intake.prompt.md`
+- IEEE structure planning: `../../templates/agents/academic-paper/structure-architect.prompt.md`
+- Evidence-grounded drafting: `../../templates/agents/academic-paper/draft-writer.prompt.md`
+- IEEE citation compliance: `../../templates/agents/academic-paper/citation-compliance.prompt.md`
+- IEEEtran/package formatting: `../../templates/agents/academic-paper/formatter.prompt.md`
+- Revision and response planning: `../../templates/agents/academic-paper/revision-coach.prompt.md`
+
 ## ASR-compatible modes
 
 | Mode | Use when | Primary output | Oversight |

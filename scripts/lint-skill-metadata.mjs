@@ -13,6 +13,28 @@ const requiredProtocols = [
   "templates/protocols/score-trajectory.prompt.md",
 ];
 
+const requiredAgentTemplates = [
+  "templates/agents/deep-research/research-question.prompt.md",
+  "templates/agents/deep-research/bibliography.prompt.md",
+  "templates/agents/deep-research/source-verification.prompt.md",
+  "templates/agents/deep-research/synthesis.prompt.md",
+  "templates/agents/deep-research/socratic-mentor.prompt.md",
+  "templates/agents/academic-paper/intake.prompt.md",
+  "templates/agents/academic-paper/structure-architect.prompt.md",
+  "templates/agents/academic-paper/draft-writer.prompt.md",
+  "templates/agents/academic-paper/citation-compliance.prompt.md",
+  "templates/agents/academic-paper/formatter.prompt.md",
+  "templates/agents/academic-paper/revision-coach.prompt.md",
+  "templates/agents/paper-reviewer/field-analyst.prompt.md",
+  "templates/agents/paper-reviewer/methodology-reviewer.prompt.md",
+  "templates/agents/paper-reviewer/domain-reviewer.prompt.md",
+  "templates/agents/paper-reviewer/devils-advocate-reviewer.prompt.md",
+  "templates/agents/paper-reviewer/editorial-synthesizer.prompt.md",
+  "templates/agents/pipeline/pipeline-orchestrator.prompt.md",
+  "templates/agents/pipeline/state-tracker.prompt.md",
+  "templates/agents/pipeline/integrity-verification.prompt.md",
+];
+
 function skillFiles(dir) {
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name);
@@ -40,6 +62,12 @@ for (const protocol of requiredProtocols) {
   }
 }
 
+for (const template of requiredAgentTemplates) {
+  if (!existsSync(join(root, template))) {
+    errors.push(`Missing agent prompt template: ${template}`);
+  }
+}
+
 for (const file of skillFiles(skillsDir)) {
   const rel = relative(root, file);
   const text = readFileSync(file, "utf8");
@@ -61,10 +89,18 @@ for (const file of skillFiles(skillsDir)) {
   if (!text.includes("## Safety protocol registry")) {
     errors.push(`${rel}: missing Safety protocol registry section`);
   }
+  if (!text.includes("## Agent prompt template registry")) {
+    errors.push(`${rel}: missing Agent prompt template registry section`);
+  }
 
   const usesAnyProtocol = requiredProtocols.some((protocol) => text.includes(protocol.replace("templates/", "../../templates/")));
   if (!usesAnyProtocol) {
     errors.push(`${rel}: no safety protocol references found`);
+  }
+
+  const usesAnyAgentTemplate = requiredAgentTemplates.some((template) => text.includes(template.replace("templates/", "../../templates/")));
+  if (!usesAnyAgentTemplate) {
+    errors.push(`${rel}: no agent prompt template references found`);
   }
 }
 
@@ -74,4 +110,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`OK: ${skillFiles(skillsDir).length} skill files include metadata and safety protocol references.`);
+console.log(`OK: ${skillFiles(skillsDir).length} skill files include metadata, safety protocols, and agent template registries.`);

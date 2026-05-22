@@ -20,7 +20,7 @@ This workspace/package is an IEEE-first Pi package scaffold that is intended to 
 
 ## Adapted material in this package
 
-As of 2026-05-22, `docs/ASR_PARITY_PROMPT_TEMPLATE_DESIGN.md` adapts the upstream Academic Research Skills architecture and agent-role inventory into an IEEE-first prompt-template migration plan. The prompt-layer protocols under `templates/protocols/` adapt upstream safety concepts for anti-leakage, citation verification, claim alignment, and score trajectory tracking. The exact local source paths are recorded in `references/source-ledger.md`. These files are rewritten structural adaptations, not direct copies of upstream prompt bodies.
+As of 2026-05-22, `docs/ASR_PARITY_PROMPT_TEMPLATE_DESIGN.md` adapts the upstream Academic Research Skills architecture and agent-role inventory into an IEEE-first prompt-template migration plan. The prompt-layer protocols under `templates/protocols/` adapt upstream safety concepts for anti-leakage, citation verification, claim alignment, and score trajectory tracking. The agent prompts under `templates/agents/` adapt upstream agent-role inventories into IEEE-first prompt templates. The exact local source paths are recorded in `references/source-ledger.md`. These files are rewritten structural adaptations, not direct copies of upstream prompt bodies.
 
 ## Project licensing posture
 

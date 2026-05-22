@@ -18,6 +18,7 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## ✅ Completed
 
+- [HIGH] Phase 1 ASR agent prompt templates ✓ 2026-05-22
 - [MED] Skill metadata/protocol lint check ✓ 2026-05-22
 - [HIGH] Prompt-layer ASR safety protocol templates ✓ 2026-05-22
 - [MED] Interactive extension settings panel ✓ 2026-05-22

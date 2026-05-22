@@ -39,6 +39,14 @@ Use these prompt-layer protocols as pipeline gates or handoff checks:
 
 Pipeline stages should preserve protocol outputs as artifacts rather than collapsing them into prose-only summaries.
 
+## Agent prompt template registry
+
+Use one role template per orchestration task, keeping state and integrity outputs visible:
+
+- Stage routing and checkpoints: `../../templates/agents/pipeline/pipeline-orchestrator.prompt.md`
+- State dashboard and artifact tracking: `../../templates/agents/pipeline/state-tracker.prompt.md`
+- Integrity gates and blocker classification: `../../templates/agents/pipeline/integrity-verification.prompt.md`
+
 ## Stage map
 
 | Stage | Name | Route | Primary deliverable | Gate |
