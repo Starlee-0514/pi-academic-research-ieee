@@ -5,6 +5,22 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added configurable extension display language and settings panel
+
+**Changes:**
+- Updated `extensions/index.ts` so command descriptions, router notifications, and `/ieee-ars-modes` output can display in English by default or Traditional Chinese via `PI_IEEE_LANG` / `.pi/ieee-academic-research-ieee.json`.
+- Added `/ars-setting`, an overlay settings panel that lets users select the display language and press `Ctrl+S` or Enter to save, then reloads the extension.
+- Updated `scripts/smoke-extension.mjs` to validate default English, environment-variable language selection, project config language selection, and config-file writing.
+- Documented the display-language setting and `/ars-setting` workflow in `README.md` and `docs/USAGE.md`.
+- Updated `ROADMAP.md` to mark configurable extension display language and the interactive settings panel completed.
+
+**Decisions:**
+- Kept English as the default for backward compatibility, with `PI_IEEE_LANG` taking precedence over project config and invalid config falling back safely to English.
+- Saved interactive settings to the project-local `.pi/ieee-academic-research-ieee.json` file so the choice persists without changing global Pi settings.
+
+**Next Steps:**
+- [LOW] Consider adding localized skill frontmatter descriptions if Pi surfaces skill descriptions prominently in the UI.
+
 ## 2026-05-22 — Added example IEEE workflow walkthrough
 
 **Changes:**

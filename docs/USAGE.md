@@ -23,6 +23,32 @@ pi install /absolute/path/to/pi-academic-research-ieee
 
 啟用後可在 Pi 中使用本套件提供的 skills 與指令。
 
+### 顯示語言設定
+
+extension 預設維持英文顯示，避免改變既有使用者的 `/` 指令補全描述。進入 Pi 後可用互動設定面板切換語言：
+
+```text
+/ars-setting
+```
+
+在設定面板中用 ↑/↓ 選擇顯示語言，按 `Ctrl+S` 儲存；儲存後 extension 會自動 reload，讓指令描述套用新語言。
+
+也可以用環境變數切換：
+
+```bash
+PI_IEEE_LANG=zh-TW pi -e .
+```
+
+或在使用此套件的專案根目錄建立 `.pi/ieee-academic-research-ieee.json`：
+
+```json
+{
+  "displayLanguage": "zh-TW"
+}
+```
+
+可接受值包含 `zh-TW`、`zh`、`中文`、`繁中`；若未設定或設定無法解析，會回到英文。
+
 ## 2. 快速確認是否載入成功
 
 在 Pi 裡輸入：
