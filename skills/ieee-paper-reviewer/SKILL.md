@@ -34,10 +34,23 @@ Reviewers may flag citation or claim risks, but should not invent missing refere
 Use one role template per reviewer lens, keeping lens reports separate before editorial synthesis:
 
 - Field and venue fit: `../../templates/agents/paper-reviewer/field-analyst.prompt.md`
+- Editor-in-chief lens: `../../templates/agents/paper-reviewer/eic.prompt.md`
 - Methodology and experiment audit: `../../templates/agents/paper-reviewer/methodology-reviewer.prompt.md`
 - Domain positioning and related work: `../../templates/agents/paper-reviewer/domain-reviewer.prompt.md`
+- Configurable extra perspective: `../../templates/agents/paper-reviewer/perspective-reviewer.prompt.md`
 - Strongest rejection case: `../../templates/agents/paper-reviewer/devils-advocate-reviewer.prompt.md`
 - Final decision synthesis: `../../templates/agents/paper-reviewer/editorial-synthesizer.prompt.md`
+
+## Mode dispatch
+
+| Mode | Template order |
+|---|---|
+| `full` | field-analyst → eic → methodology-reviewer → domain-reviewer → perspective-reviewer → devils-advocate-reviewer → editorial-synthesizer |
+| `quick` | field-analyst → eic → devils-advocate-reviewer → editorial-synthesizer |
+| `methodology-focus` | field-analyst → methodology-reviewer → devils-advocate-reviewer → editorial-synthesizer |
+| `guided` | field-analyst → eic, then ask one issue at a time |
+| `re-review` | eic → methodology-reviewer as needed → editorial-synthesizer with score-trajectory |
+| `calibration` | field-analyst → editorial-synthesizer; report uncertainty and avoid invented FNR/FPR |
 
 ## ASR-compatible modes
 

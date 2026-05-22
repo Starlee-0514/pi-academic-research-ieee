@@ -13,34 +13,17 @@ const requiredProtocols = [
   "templates/protocols/score-trajectory.prompt.md",
 ];
 
-const requiredAgentTemplates = [
-  "templates/agents/deep-research/research-question.prompt.md",
-  "templates/agents/deep-research/bibliography.prompt.md",
-  "templates/agents/deep-research/source-verification.prompt.md",
-  "templates/agents/deep-research/synthesis.prompt.md",
-  "templates/agents/deep-research/socratic-mentor.prompt.md",
-  "templates/agents/academic-paper/intake.prompt.md",
-  "templates/agents/academic-paper/structure-architect.prompt.md",
-  "templates/agents/academic-paper/draft-writer.prompt.md",
-  "templates/agents/academic-paper/citation-compliance.prompt.md",
-  "templates/agents/academic-paper/formatter.prompt.md",
-  "templates/agents/academic-paper/revision-coach.prompt.md",
-  "templates/agents/paper-reviewer/field-analyst.prompt.md",
-  "templates/agents/paper-reviewer/methodology-reviewer.prompt.md",
-  "templates/agents/paper-reviewer/domain-reviewer.prompt.md",
-  "templates/agents/paper-reviewer/devils-advocate-reviewer.prompt.md",
-  "templates/agents/paper-reviewer/editorial-synthesizer.prompt.md",
-  "templates/agents/pipeline/pipeline-orchestrator.prompt.md",
-  "templates/agents/pipeline/state-tracker.prompt.md",
-  "templates/agents/pipeline/integrity-verification.prompt.md",
-];
-
-function skillFiles(dir) {
+function filesMatching(dir, predicate) {
+  if (!existsSync(dir)) return [];
   return readdirSync(dir, { withFileTypes: true }).flatMap((entry) => {
     const path = join(dir, entry.name);
-    if (entry.isDirectory()) return skillFiles(path);
-    return entry.isFile() && entry.name === "SKILL.md" ? [path] : [];
+    if (entry.isDirectory()) return filesMatching(path, predicate);
+    return entry.isFile() && predicate(entry.name) ? [path] : [];
   });
+}
+
+function skillFiles(dir) {
+  return filesMatching(dir, (name) => name === "SKILL.md");
 }
 
 function frontmatterOf(text) {
@@ -54,6 +37,10 @@ function metadataValue(frontmatter, key) {
   return match?.[1]?.trim();
 }
 
+const requiredAgentTemplates = filesMatching(join(root, "templates", "agents"), (name) => name.endsWith(".prompt.md"))
+  .map((path) => relative(root, path).replaceAll("\\", "/"));
+const skills = skillFiles(skillsDir);
+const allSkillText = skills.map((file) => readFileSync(file, "utf8")).join("\n");
 const errors = [];
 
 for (const protocol of requiredProtocols) {
@@ -63,12 +50,22 @@ for (const protocol of requiredProtocols) {
 }
 
 for (const template of requiredAgentTemplates) {
-  if (!existsSync(join(root, template))) {
+  const fullPath = join(root, template);
+  if (!existsSync(fullPath)) {
     errors.push(`Missing agent prompt template: ${template}`);
+    continue;
+  }
+  const templateText = readFileSync(fullPath, "utf8");
+  if (!frontmatterOf(templateText)) {
+    errors.push(`${template}: missing YAML frontmatter`);
+  }
+  const skillReference = template.replace("templates/", "../../templates/");
+  if (!allSkillText.includes(skillReference)) {
+    errors.push(`${template}: not referenced by any skill registry`);
   }
 }
 
-for (const file of skillFiles(skillsDir)) {
+for (const file of skills) {
   const rel = relative(root, file);
   const text = readFileSync(file, "utf8");
   const fm = frontmatterOf(text);
@@ -92,6 +89,9 @@ for (const file of skillFiles(skillsDir)) {
   if (!text.includes("## Agent prompt template registry")) {
     errors.push(`${rel}: missing Agent prompt template registry section`);
   }
+  if (!text.includes("## Mode dispatch")) {
+    errors.push(`${rel}: missing Mode dispatch section`);
+  }
 
   const usesAnyProtocol = requiredProtocols.some((protocol) => text.includes(protocol.replace("templates/", "../../templates/")));
   if (!usesAnyProtocol) {
@@ -110,4 +110,4 @@ if (errors.length) {
   process.exit(1);
 }
 
-console.log(`OK: ${skillFiles(skillsDir).length} skill files include metadata, safety protocols, and agent template registries.`);
+console.log(`OK: ${skills.length} skill files and ${requiredAgentTemplates.length} agent templates passed metadata/registry lint.`);

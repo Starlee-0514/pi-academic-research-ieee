@@ -38,10 +38,32 @@ If a protocol cannot be fully executed because search/source access is unavailab
 Use one role template per specialized research task, keeping outputs separate before synthesis:
 
 - RQ scoping / contribution discovery: `../../templates/agents/deep-research/research-question.prompt.md`
+- Research strategy and method blueprint: `../../templates/agents/deep-research/research-architect.prompt.md`
 - Source discovery and literature set construction: `../../templates/agents/deep-research/bibliography.prompt.md`
 - Citation/source metadata checks: `../../templates/agents/deep-research/source-verification.prompt.md`
 - Related-work synthesis and claim-evidence mapping: `../../templates/agents/deep-research/synthesis.prompt.md`
+- Systematic-review quantitative synthesis: `../../templates/agents/deep-research/meta-analysis.prompt.md`
+- Bias/threat assessment: `../../templates/agents/deep-research/risk-of-bias.prompt.md`
+- Ethics/security/privacy review: `../../templates/agents/deep-research/ethics-review.prompt.md`
 - Guided exploratory dialogue: `../../templates/agents/deep-research/socratic-mentor.prompt.md`
+- Adversarial challenge: `../../templates/agents/deep-research/devils-advocate.prompt.md`
+- Publishability gate: `../../templates/agents/deep-research/editor-in-chief.prompt.md`
+- Session drift monitoring: `../../templates/agents/deep-research/monitoring.prompt.md`
+- Final research handoff: `../../templates/agents/deep-research/report-compiler.prompt.md`
+
+## Mode dispatch
+
+| Mode | Template order |
+|---|---|
+| `socratic` | socratic-mentor → research-question → devils-advocate → report-compiler |
+| `quick` | research-question → bibliography → source-verification → synthesis |
+| `full` | research-question → research-architect → bibliography → source-verification → synthesis → devils-advocate → editor-in-chief → report-compiler |
+| `lit-review` | bibliography → source-verification → synthesis → report-compiler |
+| `fact-check` | source-verification → synthesis |
+| `review` | source-verification → risk-of-bias → devils-advocate → editor-in-chief |
+| `systematic-review` | research-question → bibliography → source-verification → risk-of-bias → meta-analysis → synthesis → report-compiler |
+
+Use `monitoring` as an advisory template for long-running research sessions or when the user changes scope midstream.
 
 ## ASR-compatible modes
 

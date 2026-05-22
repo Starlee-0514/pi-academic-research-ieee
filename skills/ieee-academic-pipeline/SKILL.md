@@ -46,6 +46,23 @@ Use one role template per orchestration task, keeping state and integrity output
 - Stage routing and checkpoints: `../../templates/agents/pipeline/pipeline-orchestrator.prompt.md`
 - State dashboard and artifact tracking: `../../templates/agents/pipeline/state-tracker.prompt.md`
 - Integrity gates and blocker classification: `../../templates/agents/pipeline/integrity-verification.prompt.md`
+- Claim-reference audit: `../../templates/agents/pipeline/claim-ref-alignment-audit.prompt.md`
+- Collaboration/process reflection: `../../templates/agents/pipeline/collaboration-depth.prompt.md`
+
+## Mode dispatch
+
+| Pipeline stage | Template order |
+|---|---|
+| 0 INTAKE | pipeline-orchestrator → state-tracker |
+| 1 RESEARCH | pipeline-orchestrator → state-tracker, then route to `ieee-deep-research` mode dispatch |
+| 2 PAPER PLAN | pipeline-orchestrator → state-tracker, then route to `ieee-academic-paper:plan` or `outline-only` |
+| 3 DRAFT | state-tracker → route to `ieee-academic-paper:full` → claim-ref-alignment-audit |
+| 3.5 INTEGRITY | integrity-verification → claim-ref-alignment-audit → state-tracker |
+| 4 REVIEW | state-tracker → route to `ieee-paper-reviewer` mode dispatch |
+| 5 REVISE | state-tracker → route to `ieee-academic-paper:revision` → claim-ref-alignment-audit |
+| 5.5 RE-REVIEW | state-tracker → route to `ieee-paper-reviewer:re-review` |
+| 6 FINALIZE | integrity-verification → claim-ref-alignment-audit → route to `format-convert` / `citation-check` |
+| 7 SUBMISSION PACKAGE | state-tracker → collaboration-depth → pipeline-orchestrator |
 
 ## Stage map
 

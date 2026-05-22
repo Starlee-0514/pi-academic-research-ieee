@@ -13,10 +13,10 @@ Project-specific IEEE templates live here.
 
 Phase 1 agent templates live under `agents/`:
 
-- `agents/deep-research/` — research question, bibliography, source verification, synthesis, and Socratic mentor roles.
-- `agents/academic-paper/` — intake, structure, draft writer, citation compliance, formatter, and revision coach roles.
-- `agents/paper-reviewer/` — field analyst, methodology reviewer, domain reviewer, devil's advocate, and editorial synthesizer roles.
-- `agents/pipeline/` — orchestrator, state tracker, and integrity verification roles.
+- `agents/deep-research/` — research question, research architecture, bibliography, source verification, synthesis, systematic-review, ethics, adversarial review, monitoring, and reporting roles.
+- `agents/academic-paper/` — intake, literature strategy, structure, argument, draft writer, citation compliance, abstract, internal review, formatter, Socratic planning, visualization, and revision roles.
+- `agents/paper-reviewer/` — field analyst, EIC, methodology reviewer, domain reviewer, perspective reviewer, devil's advocate, and editorial synthesizer roles.
+- `agents/pipeline/` — orchestrator, state tracker, integrity verification, claim-reference audit, and collaboration-depth roles.
 
 Each template is an IEEE-first rewritten prompt role adapted structurally from upstream ARS agent inventories.
 

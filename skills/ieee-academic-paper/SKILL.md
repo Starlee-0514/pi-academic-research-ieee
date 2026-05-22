@@ -40,11 +40,34 @@ When drafting factual content, anti-leakage is mandatory: unsupported facts beco
 Use one role template per specialized writing task, keeping role output separate until synthesis:
 
 - Intake/configuration: `../../templates/agents/academic-paper/intake.prompt.md`
+- Literature and baseline positioning: `../../templates/agents/academic-paper/literature-strategist.prompt.md`
 - IEEE structure planning: `../../templates/agents/academic-paper/structure-architect.prompt.md`
+- Contribution logic and claim hierarchy: `../../templates/agents/academic-paper/argument-builder.prompt.md`
 - Evidence-grounded drafting: `../../templates/agents/academic-paper/draft-writer.prompt.md`
 - IEEE citation compliance: `../../templates/agents/academic-paper/citation-compliance.prompt.md`
+- Abstract and Index Terms: `../../templates/agents/academic-paper/abstract-bilingual.prompt.md`
+- Internal pre-submission review: `../../templates/agents/academic-paper/peer-reviewer.prompt.md`
 - IEEEtran/package formatting: `../../templates/agents/academic-paper/formatter.prompt.md`
+- Guided planning/revision dialogue: `../../templates/agents/academic-paper/socratic-mentor.prompt.md`
+- Figure/table planning: `../../templates/agents/academic-paper/visualization.prompt.md`
 - Revision and response planning: `../../templates/agents/academic-paper/revision-coach.prompt.md`
+
+## Mode dispatch
+
+| Mode | Template order |
+|---|---|
+| `plan` | intake → socratic-mentor → structure-architect → argument-builder |
+| `outline-only` | intake → literature-strategist → structure-architect → argument-builder |
+| `full` | intake → literature-strategist → structure-architect → argument-builder → visualization → draft-writer → citation-compliance → peer-reviewer |
+| `revision` | intake → revision-coach → argument-builder → draft-writer → citation-compliance |
+| `revision-coach` | intake → revision-coach → socratic-mentor |
+| `abstract-only` | intake → abstract-bilingual → citation-compliance |
+| `lit-review` | intake → literature-strategist → argument-builder → draft-writer → citation-compliance |
+| `format-convert` | formatter → citation-compliance |
+| `citation-check` | citation-compliance |
+| `disclosure` | intake → formatter |
+
+Apply anti-leakage in every mode that writes or revises factual prose.
 
 ## ASR-compatible modes
 

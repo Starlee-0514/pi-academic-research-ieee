@@ -5,6 +5,24 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added full agent template coverage and mode dispatch
+
+**Changes:**
+- Added 18 additional IEEE-first agent prompt templates for the remaining research, writing, reviewer, and pipeline roles, bringing `templates/agents/` to 37 prompt templates.
+- Added `## Mode dispatch` tables to all four IEEE skills so each mode or pipeline stage declares the template order to run.
+- Updated `scripts/lint-skill-metadata.mjs` to discover all agent prompt templates dynamically, verify template frontmatter, require registry references, and require mode dispatch sections.
+- Updated `templates/README.md` and `ROADMAP.md` for the expanded template coverage.
+- Added `package-lock.json` to version control at user request to make npm installs more reproducible.
+- Ran `npm test`; smoke test and lint passed.
+
+**Decisions:**
+- Kept dispatch as declarative skill guidance rather than adding extension runtime orchestration, preserving the simple `/ars-*` command router.
+- Made lint discover templates dynamically so future prompt templates are automatically checked for skill registry references.
+
+**Next Steps:**
+- [MED] Consider adding mode-specific output schemas for each dispatch path.
+- [LOW] Add optional automation for Semantic Scholar verification and claim audits.
+
 ## 2026-05-22 — Added Phase 1 ASR agent prompt templates
 
 **Changes:**
