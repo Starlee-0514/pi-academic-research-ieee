@@ -4,6 +4,8 @@ description: IEEE-oriented deep research workflow for Pi. Use for technical lite
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft
+  data_access_level: raw
+  task_type: open-ended
   upstream_references:
     - academic-research-skills: CC-BY-NC-4.0
     - nature-skills: MIT
@@ -21,6 +23,15 @@ IEEE-first research workflow for turning a topic, claim set, or draft idea into 
 3. Track every source by what it supports: background, method, dataset, metric, baseline, limitation, or contradiction.
 4. For IEEE writing handoff, produce matrices and claim-evidence maps rather than narrative-only summaries.
 5. If search access is unavailable, state limits and provide a reproducible search plan instead of pretending completeness.
+
+## Safety protocol registry
+
+Use these prompt-layer protocols when the task requires them:
+
+- Citation verification: `../../templates/protocols/citation-verification.prompt.md`
+- Claim-reference alignment: `../../templates/protocols/claim-alignment.prompt.md`
+
+If a protocol cannot be fully executed because search/source access is unavailable, disclose the limit and return `AUTHOR_INPUT_NEEDED`; do not pretend verification succeeded.
 
 ## ASR-compatible modes
 
@@ -97,7 +108,7 @@ Produce an IEEE-oriented synthesis:
 
 ### Phase 5 — Verification and handoff
 
-Before handing off to `ieee-academic-paper`, flag:
+Before handing off to `ieee-academic-paper`, apply the citation-verification and claim-alignment protocols, then flag:
 
 - unsupported novelty claims;
 - citation-support mismatches;

@@ -26,8 +26,9 @@
   },
   "devDependencies": {},
   "scripts": {
-    "test": "node scripts/smoke-extension.mjs",
+    "test": "node scripts/smoke-extension.mjs && node scripts/lint-skill-metadata.mjs",
     "check:skills": "find skills -name SKILL.md -maxdepth 3 -print",
+    "lint:skills": "node scripts/lint-skill-metadata.mjs",
     "pack:dry-run": "npm pack --dry-run"
   }
 }

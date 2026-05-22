@@ -4,6 +4,8 @@ description: IEEE-first academic paper writing workflow for Pi. Use when draftin
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft
+  data_access_level: redacted
+  task_type: open-ended
   upstream_references:
     - academic-research-skills: CC-BY-NC-4.0
     - nature-skills: MIT
@@ -21,6 +23,17 @@ IEEE-first manuscript workflow for Pi. This skill adapts the Academic Research S
 3. **Evidence before prose.** Every technical claim must map to one of: user-provided result, cited source, derivation/assumption, or explicit unresolved placeholder.
 4. **No hidden automation.** If information is missing, ask focused intake questions or mark `AUTHOR_INPUT_NEEDED`.
 5. **Checkpoint discipline.** Major decisions require user confirmation before drafting or finalizing.
+
+## Safety protocol registry
+
+Use these prompt-layer protocols when the task requires them:
+
+- Anti-leakage / material gaps: `../../templates/protocols/anti-leakage.prompt.md`
+- Citation verification: `../../templates/protocols/citation-verification.prompt.md`
+- Claim-reference alignment: `../../templates/protocols/claim-alignment.prompt.md`
+- Score trajectory for revisions: `../../templates/protocols/score-trajectory.prompt.md`
+
+When drafting factual content, anti-leakage is mandatory: unsupported facts become `[MATERIAL GAP: ...]` or `AUTHOR_INPUT_NEEDED`, never plausible filler.
 
 ## ASR-compatible modes
 
@@ -92,10 +105,10 @@ Adapt the structure for survey/theoretical/systems papers, but preserve claim-ev
 
 1. Confirm configuration and available evidence.
 2. Build an outline and evidence map.
-3. Draft section-by-section, preserving unresolved placeholders.
+3. Draft section-by-section, preserving unresolved placeholders and applying the anti-leakage protocol.
 4. Run internal checks:
-   - claim-evidence alignment;
-   - citation completeness;
+   - claim-evidence alignment using the claim-alignment protocol;
+   - citation completeness using the citation-verification protocol;
    - baseline fairness;
    - ablation coverage;
    - reproducibility details;
@@ -122,7 +135,8 @@ For every reviewer/editor comment:
 - classify as technical, experimental, citation, clarity, scope, formatting, or policy;
 - map to action: `ACCEPT_TEXT`, `ACCEPT_ANALYSIS`, `ADD_EXPERIMENT`, `SOFTEN_CLAIM`, `CLARIFY_LIMITATION`, `PUSH_BACK_WITH_EVIDENCE`, or `AUTHOR_INPUT_NEEDED`;
 - cite the manuscript location to revise;
-- draft response language only when evidence exists.
+- draft response language only when evidence exists;
+- track score/regression changes with the score-trajectory protocol when prior review scores or dimensions are available.
 
 ### `abstract-only`
 
@@ -159,7 +173,7 @@ Check or produce:
 
 ### `citation-check`
 
-Audit:
+Audit with the citation-verification protocol:
 
 - every in-text citation uses IEEE numeric style;
 - references appear in order of first citation;

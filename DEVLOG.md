@@ -5,6 +5,53 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added skill metadata and safety protocol lint
+
+**Changes:**
+- Added `scripts/lint-skill-metadata.mjs` to verify each `SKILL.md` has `metadata.data_access_level`, `metadata.task_type`, a safety protocol registry, and at least one protocol reference.
+- Updated `package.json` so `npm test` runs both the extension smoke test and the new skill metadata/protocol lint; added `npm run lint:skills`.
+- Updated `ROADMAP.md` to mark the lint check completed.
+- Ran `npm test`; smoke test and lint passed.
+
+**Decisions:**
+- Kept the lint dependency-free with simple frontmatter checks instead of introducing a YAML parser or schema dependency.
+
+**Next Steps:**
+- [HIGH] Create the Phase 1 `templates/agents/` prompt templates.
+- [MED] Expand the lint to validate future agent template registries once templates are added.
+
+## 2026-05-22 — Added prompt-layer ASR safety protocols
+
+**Changes:**
+- Added `templates/protocols/anti-leakage.prompt.md`, `citation-verification.prompt.md`, `claim-alignment.prompt.md`, and `score-trajectory.prompt.md` as IEEE-first prompt-layer safety protocols.
+- Updated `skills/ieee-deep-research/SKILL.md`, `skills/ieee-academic-paper/SKILL.md`, `skills/ieee-paper-reviewer/SKILL.md`, and `skills/ieee-academic-pipeline/SKILL.md` with safety protocol registries and `data_access_level` / `task_type` metadata.
+- Updated `templates/README.md`, `ROADMAP.md`, `references/source-ledger.md`, and `NOTICE.md` to document the new protocols and upstream attribution.
+
+**Decisions:**
+- Implemented safety features first as prompt-layer contracts rather than API or CI automation, keeping the package dependency-free and Pi-native.
+- Kept Semantic Scholar, claim-audit, VLM figure verification, and schema enforcement as later optional automation layers.
+
+**Next Steps:**
+- [HIGH] Build the Phase 1 `templates/agents/` prompt templates and connect them through skill template registries.
+- [MED] Add a lightweight lint script to verify `data_access_level`, `task_type`, and protocol references remain present.
+- [LOW] Prototype optional Semantic Scholar verification after the prompt-layer citation protocol stabilizes.
+
+## 2026-05-22 — Added ASR parity prompt-template migration design
+
+**Changes:**
+- Added `docs/ASR_PARITY_PROMPT_TEMPLATE_DESIGN.md` to define a one-agent/one-prompt-template migration strategy, proposed template layout, skill registry approach, phased implementation plan, and handling strategy for parity features such as anti-leakage, citation verification, claim-reference alignment, score trajectory, and metadata.
+- Updated `ROADMAP.md` with the high-priority in-progress ASR parity prompt-template migration item.
+- Updated `references/source-ledger.md` and `NOTICE.md` with attribution and exact upstream source paths for the design adaptation.
+
+**Decisions:**
+- Chose a design-first pass per user direction before modifying skill behavior.
+- Chose rewritten IEEE-first prompt templates rather than direct upstream prompt-body copying, while preserving the upstream agent-role inventory and safety/protocol concepts as structural references.
+
+**Next Steps:**
+- [HIGH] Implement Phase 1 minimal prompt templates under `templates/agents/` and add template registries to the four IEEE skills.
+- [HIGH] Add `data_access_level` and `task_type` metadata to skill frontmatter.
+- [MED] Add prompt-layer anti-leakage, citation-verification, and score-trajectory output contracts before adding optional API/script automation.
+
 ## 2026-05-22 — Added configurable extension display language and settings panel
 
 **Changes:**
@@ -20,6 +67,22 @@ Entries are prepended (newest first).
 
 **Next Steps:**
 - [LOW] Consider adding localized skill frontmatter descriptions if Pi surfaces skill descriptions prominently in the UI.
+
+## 2026-05-22 — Started IEEE article-reading ingestion strategy
+
+**Changes:**
+- Added `docs/IEEE_INGESTION_PLAN.md` with a comprehensive Zotero-first, Playwright-optional ingestion strategy, architecture, evidence status model, MVP phases, and decision matrix.
+- Updated `ROADMAP.md` with a high-priority in-progress item for IEEE article access and reading workflows.
+- Refined the implementation direction around Zotero-first article management, optional Playwright web-page reading, and source-grounded extraction constraints.
+
+**Decisions:**
+- Prefer a Zotero-first architecture for durable metadata, citation keys, attachments, notes, and user-managed access rights; use Playwright only as an optional browser-assisted retrieval/reading layer when the user already has lawful access.
+- Avoid designing around paywall bypass, credential automation, or bulk scraping; the agent should preserve provenance and operate on user-provided or user-authorized sources.
+
+**Next Steps:**
+- [HIGH] Draft an architecture document for the IEEE ingestion pipeline and source-grounded reading model.
+- [MED] Define MVP commands for adding, indexing, and querying IEEE papers from Zotero collections.
+- [MED] Decide whether Playwright should be packaged as an optional integration or kept as a local recipe.
 
 ## 2026-05-22 — Added example IEEE workflow walkthrough
 

@@ -4,6 +4,8 @@ description: IEEE-style technical paper reviewer for Pi. Use to critique IEEE co
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft
+  data_access_level: verified_only
+  task_type: open-ended
   upstream_references:
     - academic-research-skills: CC-BY-NC-4.0
     - nature-skills: MIT
@@ -17,6 +19,15 @@ IEEE-first peer-review simulation for technical manuscripts. This skill reviews 
 ## Read-only rule
 
 Reviewers must not modify manuscript files. Produce reports, decisions, checklists, and revision roadmaps as separate output.
+
+## Safety protocol registry
+
+Use these prompt-layer protocols when the task requires them:
+
+- Claim-reference alignment: `../../templates/protocols/claim-alignment.prompt.md`
+- Score trajectory and regression detection: `../../templates/protocols/score-trajectory.prompt.md`
+
+Reviewers may flag citation or claim risks, but should not invent missing references, experiments, line numbers, or revised prose.
 
 ## ASR-compatible modes
 
@@ -69,7 +80,7 @@ Keep perspectives separate before synthesis.
 
 ### Phase 2 — Editorial synthesis
 
-Synthesize:
+Apply claim-reference alignment for high-impact claims, then synthesize:
 
 - consensus strengths;
 - consensus weaknesses;
@@ -102,7 +113,7 @@ Check:
 
 ## Re-review mode
 
-For each prior comment:
+For each prior comment, apply score-trajectory tracking when prior scores or rubric dimensions are available:
 
 | Comment ID | Original concern | Claimed revision | Evidence location | Verification | Residual risk |
 |---|---|---|---|---|---|

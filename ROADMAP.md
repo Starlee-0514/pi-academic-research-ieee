@@ -6,7 +6,8 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## 🚧 In Progress
 
-
+- [HIGH] ASR parity prompt-template migration — Convert upstream-style agents into IEEE-first prompt templates and add parity/safety protocols in phases.
+- [HIGH] IEEE article-reading ingestion strategy — Refine compliant article access using Zotero-first metadata/PDF workflows, optional Playwright browser reading, and source-grounded extraction limits.
 
 ## 📋 Planned
 
@@ -17,6 +18,8 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## ✅ Completed
 
+- [MED] Skill metadata/protocol lint check ✓ 2026-05-22
+- [HIGH] Prompt-layer ASR safety protocol templates ✓ 2026-05-22
 - [MED] Interactive extension settings panel ✓ 2026-05-22
 - [MED] Configurable extension display language ✓ 2026-05-22
 - [MED] Example IEEE workflow walkthrough ✓ 2026-05-22

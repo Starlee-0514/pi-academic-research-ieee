@@ -4,6 +4,8 @@ description: End-to-end IEEE research-to-submission workflow for Pi. Use for com
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft
+  data_access_level: verified_only
+  task_type: open-ended
   related_skills:
     - ieee-deep-research
     - ieee-academic-paper
@@ -25,6 +27,17 @@ ASR-style orchestrator for a complete IEEE research-to-submission workflow. This
 3. Preserve a visible state dashboard: stage, inputs, deliverables, blockers, next route.
 4. Never invent missing research evidence, reviewer comments, citation metadata, experiments, line numbers, or venue requirements.
 5. Prefer single-skill routing when the user asks for a narrow task; the pipeline is opt-in.
+
+## Safety protocol registry
+
+Use these prompt-layer protocols as pipeline gates or handoff checks:
+
+- Anti-leakage / material gaps: `../../templates/protocols/anti-leakage.prompt.md`
+- Citation verification: `../../templates/protocols/citation-verification.prompt.md`
+- Claim-reference alignment: `../../templates/protocols/claim-alignment.prompt.md`
+- Score trajectory and regression detection: `../../templates/protocols/score-trajectory.prompt.md`
+
+Pipeline stages should preserve protocol outputs as artifacts rather than collapsing them into prose-only summaries.
 
 ## Stage map
 
@@ -73,7 +86,7 @@ Maintain this compact state when running the pipeline:
 
 ## Mandatory integrity checks
 
-Run before review and before finalization:
+Run before review and before finalization. Apply the anti-leakage, citation-verification, claim-alignment, and score-trajectory protocols where relevant:
 
 - Claims have evidence or placeholders.
 - Novelty claims are bounded.
@@ -85,6 +98,7 @@ Run before review and before finalization:
 - Limitations and threats to validity are explicit.
 - Figures/tables are legible in IEEE two-column layout.
 - No anonymous-review metadata remains in camera-ready files.
+- Material gaps, citation mismatches, unsupported claims, and score regressions are surfaced as separate tables.
 
 If any check fails, classify it:
 

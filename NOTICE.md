@@ -18,6 +18,10 @@ This workspace/package is an IEEE-first Pi package scaffold that is intended to 
    - Local reference clone: `ref_repos/nature-skills/` (gitignored)
    - Notes: MIT attribution and license text are preserved in `LICENSE.nature-skills-MIT`.
 
+## Adapted material in this package
+
+As of 2026-05-22, `docs/ASR_PARITY_PROMPT_TEMPLATE_DESIGN.md` adapts the upstream Academic Research Skills architecture and agent-role inventory into an IEEE-first prompt-template migration plan. The prompt-layer protocols under `templates/protocols/` adapt upstream safety concepts for anti-leakage, citation verification, claim alignment, and score trajectory tracking. The exact local source paths are recorded in `references/source-ledger.md`. These files are rewritten structural adaptations, not direct copies of upstream prompt bodies.
+
 ## Project licensing posture
 
 This scaffold is marked `private: true` in `package.json` and uses `CC-BY-NC-4.0` as the package license by default because the planned work may adapt non-commercial upstream material from Academic Research Skills.
