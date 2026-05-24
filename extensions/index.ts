@@ -18,6 +18,11 @@ type ArsRoute = {
 };
 
 const CONFIG_PATH = ".pi/ieee-academic-research-ieee.json";
+const READ_STATE_PATH = ".pi/ieee-academic-research-read-state.json";
+
+type ReadState = {
+  read: Record<string, { markedAt: string }>;
+};
 
 function normalizeLanguage(value: unknown): DisplayLanguage | undefined {
   if (typeof value !== "string") return undefined;
@@ -54,6 +59,45 @@ export function writeDisplayLanguageConfig(cwd: string, language: DisplayLanguag
   mkdirSync(dirname(configFile), { recursive: true });
   writeFileSync(configFile, `${JSON.stringify({ displayLanguage: language }, null, 2)}\n`, "utf8");
   return configFile;
+}
+
+function normalizeReadKey(value: string): string {
+  return value.trim();
+}
+
+export function readReadState(cwd = process.cwd()): ReadState {
+  const stateFile = join(cwd, READ_STATE_PATH);
+  if (!existsSync(stateFile)) return { read: {} };
+  try {
+    const parsed = JSON.parse(readFileSync(stateFile, "utf8")) as Partial<ReadState>;
+    return { read: parsed.read && typeof parsed.read === "object" ? parsed.read : {} };
+  } catch {
+    return { read: {} };
+  }
+}
+
+export function writeReadState(cwd: string, state: ReadState): string {
+  const stateFile = join(cwd, READ_STATE_PATH);
+  mkdirSync(dirname(stateFile), { recursive: true });
+  writeFileSync(stateFile, `${JSON.stringify(state, null, 2)}\n`, "utf8");
+  return stateFile;
+}
+
+export function markRead(cwd: string, key: string, now = new Date()): { key: string; file: string } {
+  const normalized = normalizeReadKey(key);
+  if (!normalized) throw new Error("A paper/source key is required.");
+  const state = readReadState(cwd);
+  state.read[normalized] = { markedAt: now.toISOString() };
+  return { key: normalized, file: writeReadState(cwd, state) };
+}
+
+export function unmarkRead(cwd: string, key: string): { key: string; file: string; existed: boolean } {
+  const normalized = normalizeReadKey(key);
+  if (!normalized) throw new Error("A paper/source key is required.");
+  const state = readReadState(cwd);
+  const existed = Object.prototype.hasOwnProperty.call(state.read, normalized);
+  delete state.read[normalized];
+  return { key: normalized, file: writeReadState(cwd, state), existed };
 }
 
 export const ROUTES: ArsRoute[] = [
@@ -130,6 +174,18 @@ export const ROUTES: ArsRoute[] = [
     output: "IEEEtran-oriented manuscript draft package",
   },
   {
+    command: "ars-full",
+    skill: "ieee-academic-paper",
+    mode: "full",
+    spectrum: "Balanced",
+    oversight: "High",
+    description: {
+      en: "Upstream-compatible alias for full IEEE paper drafting.",
+      "zh-TW": "相容 upstream 的完整 IEEE 論文草稿撰寫別名。",
+    },
+    output: "IEEEtran-oriented manuscript draft package",
+  },
+  {
     command: "ars-outline",
     skill: "ieee-academic-paper",
     mode: "outline-only",
@@ -152,6 +208,18 @@ export const ROUTES: ArsRoute[] = [
       "zh-TW": "ASR 風格修稿流程，路由至 IEEE 論文寫作 skill。",
     },
     output: "Revision plan, revised text, and response-to-reviewer skeleton",
+  },
+  {
+    command: "ars-revision-coach",
+    skill: "ieee-academic-paper",
+    mode: "revision-coach",
+    spectrum: "Fidelity",
+    oversight: "Medium",
+    description: {
+      en: "Upstream-compatible reviewer-comment coaching workflow.",
+      "zh-TW": "相容 upstream 的審稿意見修回指導流程。",
+    },
+    output: "Reviewer-comment roadmap and response skeleton",
   },
   {
     command: "ars-abstract",
@@ -190,6 +258,18 @@ export const ROUTES: ArsRoute[] = [
     output: "IEEE numbered-citation and BibTeX issue report",
   },
   {
+    command: "ars-disclosure",
+    skill: "ieee-academic-paper",
+    mode: "disclosure",
+    spectrum: "Fidelity",
+    oversight: "Low",
+    description: {
+      en: "Upstream-compatible AI/tool/data disclosure drafting.",
+      "zh-TW": "相容 upstream 的 AI、工具、資料與程式揭露聲明草稿。",
+    },
+    output: "Venue-aware disclosure draft with missing facts marked",
+  },
+  {
     command: "ars-review",
     skill: "ieee-paper-reviewer",
     mode: "full",
@@ -198,6 +278,18 @@ export const ROUTES: ArsRoute[] = [
     description: {
       en: "ASR-style multi-perspective review, routed to IEEE paper reviewer.",
       "zh-TW": "ASR 風格多視角技術審稿，路由至 IEEE paper reviewer skill。",
+    },
+    output: "IEEE-style technical peer review and decision recommendation",
+  },
+  {
+    command: "ars-reviewer",
+    skill: "ieee-paper-reviewer",
+    mode: "full",
+    spectrum: "Balanced",
+    oversight: "High",
+    description: {
+      en: "Upstream-compatible alias for IEEE multi-perspective review.",
+      "zh-TW": "相容 upstream 的 IEEE 多視角審稿別名。",
     },
     output: "IEEE-style technical peer review and decision recommendation",
   },
@@ -280,7 +372,7 @@ function modeTable(language: DisplayLanguage): string {
   ].join("\n");
 }
 
-const COMMAND_DESCRIPTIONS: Record<"info" | "modes" | "setting", LocalizedText> = {
+const COMMAND_DESCRIPTIONS: Record<"info" | "modes" | "setting" | "markRead" | "unmarkRead", LocalizedText> = {
   info: {
     en: "Show the ASR-compatible IEEE academic research command router.",
     "zh-TW": "顯示 ASR 相容的 IEEE 學術研究指令路由器資訊。",
@@ -292,6 +384,14 @@ const COMMAND_DESCRIPTIONS: Record<"info" | "modes" | "setting", LocalizedText> 
   setting: {
     en: "Open IEEE ARS extension settings.",
     "zh-TW": "開啟 IEEE ARS extension 設定。",
+  },
+  markRead: {
+    en: "Mark a paper/source key as read in the local IEEE ARS state file.",
+    "zh-TW": "將 paper/source key 標記為已讀並存到本地 IEEE ARS 狀態檔。",
+  },
+  unmarkRead: {
+    en: "Remove a paper/source key from the local IEEE ARS read state file.",
+    "zh-TW": "從本地 IEEE ARS 已讀狀態檔移除 paper/source key。",
   },
 };
 
@@ -409,6 +509,40 @@ export default function (pi: ExtensionAPI) {
       );
       await ctx.reload();
       return;
+    },
+  });
+
+  pi.registerCommand("ars-mark-read", {
+    description: text(COMMAND_DESCRIPTIONS.markRead, language),
+    handler: async (args, ctx) => {
+      try {
+        const result = markRead(ctx.cwd, args);
+        ctx.ui.notify(
+          language === "zh-TW"
+            ? `已標記為已讀：${result.key}（${result.file}）`
+            : `Marked as read: ${result.key} (${result.file})`,
+          "success",
+        );
+      } catch (error) {
+        ctx.ui.notify(error instanceof Error ? error.message : String(error), "warn");
+      }
+    },
+  });
+
+  pi.registerCommand("ars-unmark-read", {
+    description: text(COMMAND_DESCRIPTIONS.unmarkRead, language),
+    handler: async (args, ctx) => {
+      try {
+        const result = unmarkRead(ctx.cwd, args);
+        ctx.ui.notify(
+          language === "zh-TW"
+            ? `${result.existed ? "已取消已讀" : "原本未標記已讀"}：${result.key}（${result.file}）`
+            : `${result.existed ? "Unmarked read" : "Was not marked read"}: ${result.key} (${result.file})`,
+          result.existed ? "success" : "info",
+        );
+      } catch (error) {
+        ctx.ui.notify(error instanceof Error ? error.message : String(error), "warn");
+      }
     },
   });
 

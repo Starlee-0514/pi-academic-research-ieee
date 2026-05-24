@@ -2,13 +2,13 @@ import assert from 'node:assert/strict';
 import { existsSync, mkdtempSync, mkdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join } from 'node:path';
-import { ROUTES, buildSkillPrompt, resolveDisplayLanguage, writeDisplayLanguageConfig } from '../extensions/index.ts';
+import { ROUTES, buildSkillPrompt, markRead, readReadState, resolveDisplayLanguage, unmarkRead, writeDisplayLanguageConfig } from '../extensions/index.ts';
 
 assert.ok(Array.isArray(ROUTES), 'ROUTES must be an array');
-assert.equal(ROUTES.length, 15, 'expected 15 ASR-compatible routes');
+assert.equal(ROUTES.length, 19, 'expected 19 ASR-compatible routes');
 
 const commands = new Set(ROUTES.map((route) => route.command));
-for (const command of ['ars-plan', 'ars-lit-review', 'ars-review', 'ars-pipeline']) {
+for (const command of ['ars-plan', 'ars-lit-review', 'ars-review', 'ars-reviewer', 'ars-disclosure', 'ars-full', 'ars-revision-coach', 'ars-pipeline']) {
   assert.ok(commands.has(command), `missing route: ${command}`);
 }
 
@@ -35,5 +35,12 @@ const savedConfig = writeDisplayLanguageConfig(tempCwd, 'en');
 assert.ok(existsSync(savedConfig), 'language config should be written');
 assert.deepEqual(JSON.parse(readFileSync(savedConfig, 'utf8')), { displayLanguage: 'en' });
 assert.equal(resolveDisplayLanguage(tempCwd, {}), 'en');
+
+const marked = markRead(tempCwd, 'Wu2026-ASR');
+assert.ok(existsSync(marked.file), 'read-state file should be written');
+assert.equal(readReadState(tempCwd).read['Wu2026-ASR'] instanceof Object, true);
+const unmarked = unmarkRead(tempCwd, 'Wu2026-ASR');
+assert.equal(unmarked.existed, true);
+assert.equal(readReadState(tempCwd).read['Wu2026-ASR'], undefined);
 
 console.log(`OK: ${ROUTES.length} ASR-compatible routes validated.`);

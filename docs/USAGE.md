@@ -71,6 +71,22 @@ npm test
 
 ## 3. 最常用指令
 
+### Upstream-compatible aliases
+
+為了更接近 `academic-research-skills` 的使用方式，本套件也提供幾個相容別名：
+
+| 指令 | 等同/路由 | 用途 |
+|---|---|---|
+| `/ars-full` | `ieee-academic-paper:full` | 完整 IEEE paper drafting；等同本套件的 `/ars-paper`。 |
+| `/ars-reviewer` | `ieee-paper-reviewer:full` | 完整多視角審稿；等同本套件的 `/ars-review`。 |
+| `/ars-revision-coach` | `ieee-academic-paper:revision-coach` | 解析 reviewer comments，產生修回路線圖與 response skeleton。 |
+| `/ars-disclosure` | `ieee-academic-paper:disclosure` | 產生 AI/tool/data/code disclosure 草稿。 |
+| `/ars-mark-read <key>` | local read state | 將 paper/source key 標記為已讀。 |
+| `/ars-unmark-read <key>` | local read state | 取消已讀標記。 |
+
+Read-state 會存到 `.pi/ieee-academic-research-read-state.json`，這是輕量本地狀態，不等同 upstream 的完整閱讀紀錄系統。
+
+
 ### 從零開始一篇 IEEE 論文
 
 ```text
@@ -151,14 +167,37 @@ npm test
 /ars-citation-check 請檢查以下 references 是否符合 IEEE numbered citation 與 BibTeX 要求
 ```
 
+### Disclosure / AI 使用聲明
+
+```text
+/ars-disclosure
+目標 venue：IEEE conference / journal / unknown
+AI 使用方式：文獻整理、語句潤飾、程式碼輔助、圖表檢查...
+資料與程式碼可用性：...
+```
+
+若 venue policy 未提供，skill 會先要求你貼上官方政策，不會硬套泛用模板。
+
+### 可選 citation metadata 查詢 helper
+
+開發者可用 Semantic Scholar helper 做單篇標題查詢：
+
+```bash
+npm run verify:citation -- "Attention Is All You Need"
+```
+
+輸出 JSON verdict：`VERIFIED`、`MISMATCH`、`NOT_FOUND` 或 `AUTHOR_INPUT_NEEDED`。這是可選命令列工具，尚未自動接入 Pi runtime。
+
 ## 4. Skills 對應表
 
 | 需求 | 建議指令 | 底層 skill |
 |---|---|---|
 | 完整研究到投稿流程 | `/ars-pipeline` | `ieee-academic-pipeline` |
 | 研究範圍、文獻、證據地圖 | `/ars-research`, `/ars-lit-review`, `/ars-fact-check` | `ieee-deep-research` |
-| 論文規劃、草稿、摘要、格式 | `/ars-plan`, `/ars-paper`, `/ars-abstract`, `/ars-format-convert` | `ieee-academic-paper` |
-| 技術審稿、方法檢查、re-review | `/ars-review`, `/ars-methodology`, `/ars-rereview` | `ieee-paper-reviewer` |
+| 論文規劃、草稿、摘要、格式 | `/ars-plan`, `/ars-paper`, `/ars-full`, `/ars-abstract`, `/ars-format-convert` | `ieee-academic-paper` |
+| 修回規劃與回覆信 | `/ars-revision`, `/ars-revision-coach` | `ieee-academic-paper` |
+| 技術審稿、方法檢查、re-review | `/ars-review`, `/ars-reviewer`, `/ars-methodology`, `/ars-rereview` | `ieee-paper-reviewer` |
+| AI/tool/data/code disclosure | `/ars-disclosure` | `ieee-academic-paper` |
 
 你也可以直接呼叫 skill：
 

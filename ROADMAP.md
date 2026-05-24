@@ -6,6 +6,7 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## 🚧 In Progress
 
+- [HIGH] ASR automation parity — Expand optional Semantic Scholar, claim audit, schema lint, and source-provenance checks beyond prompt-layer protocols.
 - [HIGH] ASR parity prompt-template migration — Convert upstream-style agents into IEEE-first prompt templates and add parity/safety protocols in phases.
 - [HIGH] IEEE article-reading ingestion strategy — Refine compliant article access using Zotero-first metadata/PDF workflows, optional Playwright browser reading, and source-grounded extraction limits.
 
@@ -18,6 +19,9 @@ Priority tags: `[HIGH]` `[MED]` `[LOW]`
 
 ## ✅ Completed
 
+- [HIGH] Upstream-compatible ASR command aliases ✓ 2026-05-22
+- [MED] ASR parity status and usage documentation ✓ 2026-05-22
+- [MED] Optional Semantic Scholar citation helper ✓ 2026-05-22
 - [HIGH] ASR agent mode dispatch rules ✓ 2026-05-22
 - [MED] Remaining ASR agent prompt templates ✓ 2026-05-22
 - [HIGH] Phase 1 ASR agent prompt templates ✓ 2026-05-22

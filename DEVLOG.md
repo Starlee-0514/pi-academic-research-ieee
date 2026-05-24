@@ -5,6 +5,24 @@ Entries are prepended (newest first).
 
 ---
 
+## 2026-05-22 — Added upstream-compatible commands and citation helper
+
+**Changes:**
+- Updated `extensions/index.ts` with upstream-compatible `/ars-full`, `/ars-reviewer`, `/ars-revision-coach`, and `/ars-disclosure` routes plus lightweight `/ars-mark-read` and `/ars-unmark-read` local read-state commands.
+- Updated `scripts/smoke-extension.mjs` for 19 routes and read-state tests.
+- Added `scripts/semantic-scholar-verify.mjs` and `npm run verify:citation` for optional single-title Semantic Scholar metadata checks.
+- Added `docs/ASR_PARITY_STATUS.md` and updated `README.md` / `docs/USAGE.md` with command aliases, disclosure usage, read-state behavior, and citation helper instructions.
+- Updated `ROADMAP.md` and `references/source-ledger.md` for parity tracking and upstream attribution.
+
+**Decisions:**
+- Implemented mark-read/unmark-read as lightweight local JSON state instead of porting the full upstream reading-state script system.
+- Kept Semantic Scholar verification as an optional command-line helper, not an automatic Pi runtime dependency.
+
+**Next Steps:**
+- [HIGH] Expand citation verification from single-title lookup to batch reference-table verification.
+- [MED] Add source-ledger/NOTICE lint and command parity lint.
+- [MED] Design claim-audit JSON schema before adding runtime claim-audit automation.
+
 ## 2026-05-22 — Added full agent template coverage and mode dispatch
 
 **Changes:**

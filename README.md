@@ -43,8 +43,8 @@ pi-academic-research-ieee/
 
 ## Usage / 使用方式
 
-For the full usage guide, see [`docs/USAGE.md`](docs/USAGE.md). For a complete example, see [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md).
-完整中文使用說明請看 [`docs/USAGE.md`](docs/USAGE.md)；完整範例請看 [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md)。
+For the full usage guide, see [`docs/USAGE.md`](docs/USAGE.md). For a complete example, see [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md). For current upstream parity status, see [`docs/ASR_PARITY_STATUS.md`](docs/ASR_PARITY_STATUS.md).
+完整中文使用說明請看 [`docs/USAGE.md`](docs/USAGE.md)；完整範例請看 [`docs/WALKTHROUGH.md`](docs/WALKTHROUGH.md)；目前與 upstream 的差異請看 [`docs/ASR_PARITY_STATUS.md`](docs/ASR_PARITY_STATUS.md)。
 
 ### Quick start / 快速開始
 
@@ -92,12 +92,14 @@ pi install /absolute/path/to/pi-academic-research-ieee
   規劃 IEEE 論文架構、貢獻主張、證據缺口與作者待回答問題。
 - `/ars-lit-review` — related-work matrix, baselines, datasets, metrics, and evidence map.  
   整理文獻回顧、baseline、dataset、metric 與 claim-evidence map。
-- `/ars-paper` — IEEE-oriented manuscript drafting workflow.  
+- `/ars-paper` / `/ars-full` — IEEE-oriented manuscript drafting workflow.  
   依照 IEEE 風格協助撰寫 manuscript、section draft 或完整草稿。
-- `/ars-review` — IEEE-style technical peer review and revision roadmap.  
+- `/ars-review` / `/ars-reviewer` — IEEE-style technical peer review and revision roadmap.  
   用 IEEE reviewer 角度檢查 novelty、technical soundness、實驗、ablation、reproducibility 與 venue fit。
 - `/ars-citation-check` — IEEE numbered-citation and BibTeX issue report.  
   檢查 IEEE 編號引用、BibTeX metadata、引用缺口與格式問題。
+- `/ars-disclosure` — venue-aware AI/tool/data/code disclosure draft.  
+  產生符合 venue 政策的 AI、工具、資料與程式揭露聲明草稿。
 
 ### Recommended first prompt / 建議第一個 prompt
 
@@ -112,10 +114,16 @@ pi install /absolute/path/to/pi-academic-research-ieee
 
 ## Local development
 
-Run the smoke test:
+Run the smoke test and metadata/template lint:
 
 ```bash
 npm test
+```
+
+Optionally verify a citation title with Semantic Scholar:
+
+```bash
+npm run verify:citation -- "Attention Is All You Need"
 ```
 
 List skill files:
