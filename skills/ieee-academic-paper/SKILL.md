@@ -1,6 +1,7 @@
 ---
 name: ieee-academic-paper
-description: IEEE-first academic paper writing workflow for Pi. Use when drafting, planning, revising, formatting, or checking IEEE conference/journal manuscripts, IEEEtran LaTeX, numbered citations, BibTeX, Index Terms, experiments, ablations, limitations, reviewer responses, or camera-ready packages. Supports ASR-compatible modes: full, plan, outline-only, revision, revision-coach, abstract-only, lit-review, format-convert, citation-check, disclosure.
+description: >
+  IEEE-first academic paper writing workflow for Pi. Use when drafting, planning, revising, formatting, or checking IEEE conference/journal manuscripts, IEEEtran LaTeX, numbered citations, BibTeX, Index Terms, experiments, ablations, limitations, reviewer responses, or camera-ready packages. Supports ASR-compatible modes: full, plan, outline-only, revision, revision-coach, abstract-only, lit-review, format-convert, citation-check, disclosure.
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft

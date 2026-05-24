@@ -1,6 +1,7 @@
 ---
 name: ieee-deep-research
-description: IEEE-oriented deep research workflow for Pi. Use for technical literature review, related work mapping, systematic evidence collection, baseline identification, dataset/method comparison, claim verification, Socratic research scoping, and systematic review planning for IEEE-style papers. Supports ASR-compatible modes: full, quick, review, lit-review, fact-check, socratic, systematic-review.
+description: >
+  IEEE-oriented deep research workflow for Pi. Use for technical literature review, related work mapping, systematic evidence collection, baseline identification, dataset/method comparison, claim verification, Socratic research scoping, and systematic review planning for IEEE-style papers. Supports ASR-compatible modes: full, quick, review, lit-review, fact-check, socratic, systematic-review.
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft

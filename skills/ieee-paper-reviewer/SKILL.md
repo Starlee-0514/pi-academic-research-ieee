@@ -1,6 +1,7 @@
 ---
 name: ieee-paper-reviewer
-description: IEEE-style technical paper reviewer for Pi. Use to critique IEEE conference/journal manuscripts for novelty, technical soundness, experiment rigor, baseline fairness, ablations, reproducibility, clarity, limitations, ethics/security, and venue fit. Supports ASR-compatible modes: full, re-review, quick, methodology-focus, guided, calibration.
+description: >
+  IEEE-style technical paper reviewer for Pi. Use to critique IEEE conference/journal manuscripts for novelty, technical soundness, experiment rigor, baseline fairness, ablations, reproducibility, clarity, limitations, ethics/security, and venue fit. Supports ASR-compatible modes: full, re-review, quick, methodology-focus, guided, calibration.
 license: CC-BY-NC-4.0
 metadata:
   status: active-draft
